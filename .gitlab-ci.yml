@@ -1,0 +1,8 @@
+buildjob:
+  stage:build 
+  tags:
+    - docker
+  script:
+    - docker build -t vijaychandar30/flaskapp:latest
+    - docker image push vijaychandar30/flaskapp:latest
+    - aws ecs update-service --cluster flaskcluster --service flaskapp-service --force-new-deployment
